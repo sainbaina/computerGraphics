@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <input id="uploadImage" type="file" onchange="Open_Image();" />
+        <button onclick="CopyToCanvas();"> копируем на канвас </button>
+        <button onclick="convert();"> негатив </button>
+        <button onclick="GrayScale();"> гадации серого </button>
+        <button onclick="Contrast();"> + контраст </button>
+        <!-- подключаем файл my.js -->
+        <script src="lab3.js"></script>
+        <p>
+            <img src="" id="my_image"/>
+            <canvas id="my_canvas"></canvas>
+        </p>
+    </body>
+</html>
