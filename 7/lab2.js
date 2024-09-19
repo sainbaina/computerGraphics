@@ -14,7 +14,7 @@ let y0 = 400;
 let fi = 0;
 
 //var
-let k = 12/9; 
+let k = 3/7; 
 let r = 20;
 let R = r*k;
 

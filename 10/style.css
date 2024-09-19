@@ -1,0 +1,22 @@
+td{
+    max-width: fit-content;
+}
+
+button {
+    width: 100px;
+}
+
+input {
+    width: 100px;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    width:100vw;
+    height:100vh;
+}
+

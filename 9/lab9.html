@@ -1,0 +1,41 @@
+<html>
+    <link rel="stylesheet" href="style.css">
+    <body>
+        <div>
+            <div>
+                <button onclick="CoordMirror();"> Coord mirror </button>
+                <button onclick="XisYMirror();"> x=y mirror </button>
+                <button onclick="ReloadFigurePos();"> reload figure pos </button>
+            </div>
+            <div>
+                <input style="width:70"t id="oXInput" type="number" placeholder="dx"></input>
+                <input style="width:70" id="oYInput" type="number" placeholder="dy"></input>
+                <button onclick="Move();"> move </button>
+            </div>
+            <div>
+                <input id="rotateInput" type="number" placeholder="degree"></input>
+                <button onclick="Rotate();"> rotate </button>
+            </div>
+            <div>
+                <input style="width:70" id="scaleXInput" type="number" placeholder="x"></input>
+                <input style="width:70" id="scaleYInput" type="number" placeholder="y"></input>
+                <button onclick="Scale();"> scale </button>
+            </div>
+            <div>
+                <input id="rotateCenterInput" type="number" placeholder="degree"></input>
+                <button onclick="RotateByCoordCenter();"> rotate by coord center </button>
+            </div>
+            <div>
+                <input style="width:70" id="rotatePointInputX" type="number" placeholder="x"></input>
+                <input style="width:70" id="rotatePointInputY" type="number" placeholder="y"></input>
+                <input style="width:70" id="rotatePointInputDeg" type="number" placeholder="degree"></input>
+                <button onclick="RotateByPoint();"> rotate by point </button>
+            </div>
+        </div>
+        <canvas style="position: absolute; top:0; left:400" id="my_canvas"></canvas>
+        <script src="lab9.js"></script>
+        <script language='JavaScript'>
+            InitCanvas();
+        </script>
+    </body>
+</html>

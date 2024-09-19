@@ -1,0 +1,89 @@
+<html>
+    <link rel="stylesheet" href="style.css">
+    <body>
+        <canvas style="position: absolute; top:0; left:400" id="my_canvas"></canvas>
+        <script src="lab10.js"></script>
+        <script language='JavaScript'>
+            render();
+        </script>
+        <table>
+            <tr>
+                <td colspan="3">
+                    <button style="width: 308px;" onclick="ReloadFigurePos();"> reload figure pos </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="XProjection();"> project on x </button>
+                </td>
+                <td>
+                    <button onclick="YProjection();"> project on y </button>
+                </td>
+                <td>
+                    <button onclick="ZProjection();"> project on z </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="XMirror();"> mirror on x </button>
+                </td>
+                <td>
+                    <button onclick="YMirror();"> mirror on y </button>
+                </td>
+                <td>
+                    <button onclick="ZMirror();"> mirror on z </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="rotateInput" type="number" placeholder="degree"></input>
+                </td>
+                <td>
+                    <button onclick="RotateX();"> rotate x </button>
+                </td>
+                <td>
+                    <button onclick="RotateY();"> rotate y </button>
+                </td>
+                <td>
+                    <button onclick="RotateZ();"> rotate z </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="scaleXInput" type="number" placeholder="x"></input>
+                </td>
+                <td>
+                    <input id="scaleYInput" type="number" placeholder="y"></input>
+                </td>
+                <td>
+                    <input id="scaleZInput" type="number" placeholder="z"></input>
+                </td>
+                <td>
+                    <button onclick="Scale();"> scale </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="oXInput" type="number" placeholder="x"></input>
+                </td>
+                <td>
+                    <input id="oYInput" type="number" placeholder="y"></input>
+                </td>
+                <td>
+                    <input id="oZInput" type="number" placeholder="z"></input>
+                </td>
+                <td>
+                    <button onclick="Move();"> move </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="BackFromProjection();"> point view </button>
+                </td>
+                <td>
+                    <button onclick="OblickView();"> oblick view </button>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
