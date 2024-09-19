@@ -89,24 +89,14 @@ function getTranslateMatrix({a=1, e=1, j=1, s=1, b=0, c=0, p=0, d=0, f=0, q=0, h
     return T;
 }
 
-function normalize(vector) {
-    const [x, y, z, w] = vector;
-    const magnitude = Math.sqrt(x * x + y * y + z * z);
-    if (magnitude === 0) return vector; 
-    return [x / magnitude, y / magnitude, z / magnitude, w]; 
-}
-
-function translate(matrix) {
-    for (let k = 0; k < vertices.length; k++) {
-        for (let i = 0; i < 4; i++) {
-            temp = 0;
-            for (let j = 0; j < 4; j++) {
-                temp += vertices[k][j] * matrix[j][i];
-            }
-            vertices[k][i] = temp;
-        }   
+function normalize() {
+    for (let i = 0; i < vertices.length; i++) {
+        console.log(vertices[i][3]);
+        let length = Math.sqrt(vertices[i][0] ** 2 + vertices[i][1] ** 2 + vertices[i][2] ** 2);
+        vertices[i][0] /= length;
+        vertices[i][1] /= length;
+        vertices[i][2] /= length;
     }
-    projectedVertices = vertices.map(projectVertex);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -117,22 +107,37 @@ function Move() {
 
     let translateMatrix = getTranslateMatrix({
         l:oxInput.value || 0, 
-        m:oyInput.value || 0,
+        m:-oyInput.value || 0,
         n:ozInput.value || 0
         });
 
     translate(translateMatrix);
 }
 
+function translate(matrix) {
+    let newVertices = [];
+    for (let k = 0; k < vertices.length; k++) {
+        let temp = [0, 0, 0, 0];
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                temp[i] += vertices[k][j] * matrix[j][i];
+            }
+        }
+        newVertices.push(temp);
+    }
+    vertices = newVertices;
+    projectedVertices = vertices.map(projectVertex);
+}
+
 function RotateX() {
     let deg = document.getElementById("rotateInput");
-    let rad = deg.value*Math.PI/180;
+    let rad = parseFloat(deg.value || 0)*Math.PI/180;
 
     let translateMatrix = getTranslateMatrix({
         e:Math.cos(rad),
         f:Math.sin(rad),
-        h:-Math.sin(rad),
-        i:Math.cos(rad)
+        i:-Math.sin(rad),
+        j:Math.cos(rad)
         });
 
     translate(translateMatrix);
@@ -140,14 +145,14 @@ function RotateX() {
 
 function RotateY() {
     let deg = document.getElementById("rotateInput");
-    let rad = deg.value*Math.PI/180;
+    let rad = parseFloat(deg.value || 0)*Math.PI/180;
 
     let translateMatrix = getTranslateMatrix({
         a:Math.cos(rad),
         c:-Math.sin(rad),
         e:1,
-        g:Math.sin(rad),
-        i:Math.cos(rad)
+        h:Math.sin(rad),
+        j:Math.cos(rad)
         });
 
     translate(translateMatrix);
@@ -155,7 +160,7 @@ function RotateY() {
 
 function RotateZ() {
     let deg = document.getElementById("rotateInput");
-    let rad = deg.value*Math.PI/180;
+    let rad = parseFloat(deg.value || 0)*Math.PI/180;
 
     let translateMatrix = getTranslateMatrix({
         a:Math.cos(rad),
@@ -172,21 +177,7 @@ function ReloadFigurePos() {
     projectedVertices = vertices.map(projectVertex);
 }
 
-function XProjection() {
-    for (let i = 0; i < vertices.length; i++) {
-        projectedVertices[i][0] = vertices[i][1];
-        projectedVertices[i][1] = vertices[i][2];
-    }
-}
-
-function YProjection() {
-    for (let i = 0; i < vertices.length; i++) {
-        projectedVertices[i][0] = vertices[i][0];
-        projectedVertices[i][1] = vertices[i][2];
-    }
-}
-
-function ZProjection() {
+function FrontView() {
     for (let i = 0; i < vertices.length; i++) {
         projectedVertices[i][0] = vertices[i][0];
         projectedVertices[i][1] = vertices[i][1];
@@ -197,10 +188,6 @@ function BackFromProjection() {
     projectedVertices = vertices.map(projectVertex);
 }
 
-function Normalize() {
-    console.log(vertices);
-}
-
 function Scale(){
     let sX = document.getElementById("scaleXInput");
     let sY = document.getElementById("scaleYInput");
@@ -209,13 +196,8 @@ function Scale(){
     let translateMatrix = getTranslateMatrix({
         a:sX.value || 1,
         e:sY.value || 1,
-        i:sZ.value || 1,
+        j:sZ.value || 1,
     });
-
-    console.log(translateMatrix);
-
-    Normalize();
-
     translate(translateMatrix);
 }
 
