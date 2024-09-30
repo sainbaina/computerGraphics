@@ -235,3 +235,84 @@ function OblickView() {
         projectedVertices[i][1] = yProjected;   
     }
 }
+
+function getFocusableElements() {
+    return [...document.querySelectorAll('input, button, a, select, textarea, [tabindex]:not([tabindex="-1"])')]
+        .filter(el => !el.disabled && el.tabIndex >= 0);
+}
+
+function focus(name){
+    document.getElementById(name).focus();
+}
+
+function click(){
+    const activeElement = document.activeElement;
+    activeElement.click();
+}
+
+
+document.addEventListener('keydown', function(event) {
+    const focusableElements = getFocusableElements();
+    const activeElement = document.activeElement;
+
+    const currentIndex = focusableElements.indexOf(activeElement);
+    if (event.altKey){
+        event.preventDefault();
+        switch (event.key){
+            case "x":
+                focus("mirrXButt");
+                click();
+                break;
+            case "y":
+                focus("mirrYButt");
+                click();
+                break;
+            case "z":
+                focus("mirrZButt");
+                click();
+                break;
+            case "p":
+                focus("pointViewButt");
+                click();
+                break;
+            case "o":
+                focus("oblickViewButt");
+                click();
+                break;
+            case "f":
+                focus("frontViewButt");
+                click();
+                break;
+        }
+    } else {
+        switch (event.key) {
+            case "ArrowRight":
+                event.preventDefault();
+                const nextIndex = (currentIndex + 1) % focusableElements.length;
+                focusableElements[nextIndex].focus();
+                break;
+            case "ArrowLeft":
+                event.preventDefault();
+                const prevIndex = (currentIndex - 1 + focusableElements.length) % focusableElements.length;
+                focusableElements[prevIndex].focus();
+                break;
+            case "r":
+                focus("rotateInput");
+                break;
+            case "s":
+                focus("scaleXInput");
+                break;
+            case "m":
+                focus("oXInput");
+                break;
+            case "v":
+                focus("viewButt");
+                click();
+                break;
+            case "`":
+                focus("reloadButt");
+                click();
+                break;
+        }
+    }
+});
